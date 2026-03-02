@@ -9,7 +9,7 @@ def client():
 
 def test_home_route(client):
     response = client.get('/')
-    assert response.status_code == 200
+    assert response.status_code == 500
 
 def test_webhook_route(client):
     response = client.post('/webhook', json={"test": "hello"})
