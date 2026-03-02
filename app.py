@@ -4,25 +4,25 @@ app = Flask(__name__)
 
 complaints = []
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    print("Webhook triggered!")
-    print(request.json)
-    return "OK", 200
-
 @app.route('/')
 def home():
-    return "Complaint System Running 🔥"
+    return "Complaint System Running"
 
 @app.route('/complaint', methods=['POST'])
-def create_complaint():
+def add_complaint():
     data = request.json
     complaints.append(data)
-    return jsonify({"message": "Complaint added"}), 201
+    return "Complaint Added", 201
 
-@app.route('/complaints', methods=['GET'])
+@app.route('/complaints')
 def get_complaints():
     return jsonify(complaints)
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    print("Deployment event received")
+    print(request.json)
+    return "OK", 200
 
 if __name__ == '__main__':
     app.run(debug=True)
