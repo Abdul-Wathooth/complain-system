@@ -4,6 +4,12 @@ app = Flask(__name__)
 
 complaints = []
 
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    print("Webhook triggered!")
+    print(request.json)
+    return "OK", 200
+
 @app.route('/')
 def home():
     return "Complaint System Running 🔥"
